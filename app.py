@@ -15,9 +15,17 @@ toolbar = DebugToolBarExtension(app)
 connect_db(app)
 db.create_all()
 
+@app.route('/')
+def root():
+    """Homepage to list of users"""
+
+    return redirect("/users")
+
+
 @app.route('/users')
 def users_index():
     """Show a page with information on all Blogly users"""
 
     users = User.query.order_by(User.last_name, User.first_name).all()
     return render_template(users/'index.html', users=users)
+
