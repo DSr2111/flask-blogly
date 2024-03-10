@@ -9,7 +9,7 @@ DEFAULT_IMAGE_URL = "https://www.freeiconspng.com/uploads/icon-user-blue-symbol-
 
 
 class User(db.Model):
-    """Setting up Blogly Users"""
+    """Setting up Blogly Users."""
     __tablename__ = 'users'
 
     id = db.Column(db.integer, primary_key=True)
@@ -19,5 +19,11 @@ class User(db.Model):
 
     @property
     def full_name(self):
-        """ Getter that returns full name"""
+        """ Getter that returns full name."""
         return f"{self.first_name} {self.last_name}"
+    
+    def connect_db(app):
+        """Connect to our Flask app."""
+
+        db.app = app
+        db.init_app(app)
