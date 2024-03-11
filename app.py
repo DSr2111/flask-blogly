@@ -86,4 +86,8 @@ def posts_new(user_id):
     new_post = Post(title=request.form['title'],
                     content=request.form['content'],
                     user=user)
+    db.session.add(new_post)
+    db.session.commit()
+    flash(f"Post {new_post.title} submitted!")
 
+    return redirect(f"/users/{user_id}")
