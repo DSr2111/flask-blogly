@@ -105,3 +105,17 @@ def posts_edit(post_id):
 
     post = Post.query.get_or_404(post_id)
     return render_template('posts/edit.html', post=post)
+
+@app.route('/posts/<int:post_id>/edit', methods=["POST"])
+def posts_update(post_id):
+    """Form submission to edit existing post"""
+
+    post = Post.query.get_or_404(post_id)
+    post.title = request.form['title']
+    post.content = request.form['content']
+
+    db.session.add(post)
+    db.session.commit()
+    flash(f"Post '{post.title}' updated!")
+
+    return redirect(f"/users/{post.user_id}")
