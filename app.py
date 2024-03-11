@@ -94,7 +94,14 @@ def posts_new(user_id):
 
 @app.route('/posts/<int:post_id>')
 def posts_show(post_id):
-    """Show a page with info on a specific post"""
+    """Show post info page"""
 
     post = Post.query.get_or_404(post_id)
     return render_template('posts/show.html', post=post)
+
+@app.route('/posts/<int:post_id>/edit')
+def posts_edit(post_id):
+    """Form to edit an existing post"""
+
+    post = Post.query.get_or_404(post_id)
+    return render_template('posts/edit.html', post=post)
