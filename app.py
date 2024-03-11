@@ -1,6 +1,6 @@
 """Blogly application."""
 
-from flask import Flask, request, redirect, render_template
+from flask import Flask, request, redirect, render_template, flash
 from flask_debugtoolbar import DebugToolBarExtension
 from models import db, connect_db, User
 
@@ -56,6 +56,7 @@ def users_update(user_id):
 
     db.session.add(user)
     db.session.commit()
+    flash(f"User {user.full_name} updated")
 
     return redirect("/users")
 
@@ -68,3 +69,4 @@ def users_destroy(user_id):
     db.session.commit()
 
     return redirect("/users")
+
