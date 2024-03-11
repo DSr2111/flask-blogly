@@ -22,11 +22,6 @@ class User(db.Model):
         """ Getter that returns full name."""
         return f"{self.first_name} {self.last_name}"
     
-    def connect_db(app):
-        """Connect to our Flask app."""
-
-        db.app = app
-        db.init_app(app)
 
 class Post(db.model):
     """Posts"""
@@ -44,4 +39,11 @@ class Post(db.model):
 def friendly_date(self):
     """Return a formatted date"""
 
-    return self.created_at.strftime("%a %b %-d %Y, %-I:%M %p")
+    return self.created_at.strftime("%a %b %-d %Y, %-I:%M %p") 
+
+
+def connect_db(app):
+        """Connect to our Flask app."""
+
+        db.app = app
+        db.init_app(app)
