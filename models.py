@@ -27,3 +27,21 @@ class User(db.Model):
 
         db.app = app
         db.init_app(app)
+
+class Post(db.model):
+    """Posts"""
+    __tablename__ = "posts"
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.Text, nullable=False)
+    content = db.Column(db.Text, nullable=False)
+    created_at = db.Column(db.DateTime,
+                            nullable=False,
+                            default=datetime.datetime.now)
+    user_id = db.column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+
+@property
+def friendly_date(self):
+    """Return a formatted date"""
+
+    return self.created_at.strftime("%a %b %-d %Y, %-I:%M %p")
