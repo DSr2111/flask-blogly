@@ -119,3 +119,15 @@ def posts_update(post_id):
     flash(f"Post '{post.title}' updated!")
 
     return redirect(f"/users/{post.user_id}")
+
+@app.route('/posts/<int:post_id>/delete', methods=["POST"])
+def posts_destroy(post_id):
+    """Form submission to delete an existing post"""
+
+    post = Post.query.get_or_404(post_id)
+
+    db.session.delete(post)
+    db.session.commit()
+    flash(f"Post '{post.title} deleted.")
+
+    return redirect(f"/users/{post.user_id}")
