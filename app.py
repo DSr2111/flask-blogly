@@ -67,6 +67,7 @@ def users_destroy(user_id):
     user = User.query.get_or_404(user_id)
     db.session.delete(user)
     db.session.commit()
+    flash(f"User {user.full_name} deleted.")
 
     return redirect("/users")
 
