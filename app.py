@@ -44,3 +44,17 @@ def users_new():
 
     """take client back to user list once new user is added"""
     return redirect("/users")
+
+@app.route('/users/<int:user_id>/edit', methods=['POST'])
+def users_update(user_id):
+    """Form handling to update user info"""
+
+    user = User.query.get_or_404(user_id)
+    user.first_name = request.form['first_name']
+    user.last_name = request.form['last_name']
+    user.image_url = request.form['image_url']
+
+    db.session.add(user)
+    db.session.commit()
+
+    return redirect("/users")
