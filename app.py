@@ -71,3 +71,9 @@ def users_destroy(user_id):
 
     return redirect("/users")
 
+@app.route('/users/<int:user_id>/posts/new')
+def posts_new_form(user_id):
+    """"Form to create new post for a user"""
+
+    user = User.query.get_or_404(user_id)
+    return render_template('posts/new.html', user=user)
