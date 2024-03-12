@@ -156,7 +156,15 @@ def tags_new():
 
 @app.route('/tags/<int:tag_id>')
 def tags_show(tag_id):
-    """Show a page with info on a specific tag"""
+    """Page with specified tag information"""
 
     tag = Tag.query.get_or_404(tag_id)
     return render_template('tags/show.html', tag=tag)
+
+@app.route('/tags/<int:tag_id>/edit')
+def tags_edit_form(tag_id):
+    """Form to edit an existing tag"""
+
+    tag = Tag.query.get_or_404(tag_id)
+    posts = Post.query.all()
+    return render_template('tags/edit.html', tag=tag, posts=posts)
