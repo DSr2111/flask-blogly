@@ -153,3 +153,10 @@ def tags_new():
     flash(f"Tag '{new_tag.name}' created!")
 
     return redirect("/tags")
+
+@app.route('/tags/<int:tag_id>')
+def tags_show(tag_id):
+    """Show a page with info on a specific tag"""
+
+    tag = Tag.query.get_or_404(tag_id)
+    return render_template('tags/show.html', tag=tag)
