@@ -2,7 +2,7 @@
 
 from flask import Flask, request, redirect, render_template, flash
 from flask_debugtoolbar import DebugToolBarExtension
-from models import db, connect_db, User, Post
+from models import db, connect_db, User, Post, Tag
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///blogly'
@@ -131,3 +131,15 @@ def posts_destroy(post_id):
     flash(f"Post '{post.title} deleted.")
 
     return redirect(f"/users/{post.user_id}")
+
+@app.route('/tags')
+def tags_index():
+    """Page with all tags information"""
+
+    tags = Tag.query.all()
+    return render_template('tags/index.html', tags=tags)
+
+
+@app.route('/tags/new', methods=['POST'])
+def tags_new_form():
+    """Form to create a new tag"""
