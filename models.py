@@ -42,13 +42,6 @@ def friendly_date(self):
     return self.created_at.strftime("%a %b %-d %Y, %-I:%M %p") 
 
 
-def connect_db(app):
-        """Connect to our Flask app."""
-
-        db.app = app
-        db.init_app(app)
-
-
 class Tag(db.Model):
     """Tag that can be added to posts."""
 
@@ -71,3 +64,11 @@ class PostTag(db.Model):
 
      post_id = db.Column(db.Integer, db.ForeignKey('posts.id'), primary_key=True)
      tag_id = db.Column(db.Integer, db.ForeignKey('tags.id'), primary_key=True)
+
+
+def connect_db(app):
+        """Connect to our Flask app."""
+
+        db.app = app
+        db.init_app(app)
+
